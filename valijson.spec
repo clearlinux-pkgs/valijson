@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : valijson
-Version  : 1.0
-Release  : 1
-URL      : https://github.com/tristanpenman/valijson/archive/v1.0/valijson-1.0.tar.gz
-Source0  : https://github.com/tristanpenman/valijson/archive/v1.0/valijson-1.0.tar.gz
+Version  : 1.0.1
+Release  : 2
+URL      : https://github.com/tristanpenman/valijson/archive/v1.0.1/valijson-1.0.1.tar.gz
+Source0  : https://github.com/tristanpenman/valijson/archive/v1.0.1/valijson-1.0.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause
@@ -43,31 +43,31 @@ license components for the valijson package.
 
 
 %prep
-%setup -q -n valijson-1.0
-cd %{_builddir}/valijson-1.0
+%setup -q -n valijson-1.0.1
+cd %{_builddir}/valijson-1.0.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681928561
+export SOURCE_DATE_EPOCH=1695773997
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1681928561
+export SOURCE_DATE_EPOCH=1695773997
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/valijson
 cp %{_builddir}/valijson-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/valijson/20c2586c26d01d1b0a233252f957127d0218da7d || :
